@@ -6,4 +6,4 @@
 
 - 文档：[https://java.cool-admin.com](https://java.cool-admin.com)
 
-- 官网：[https://cool-js.com](https://cool-js.com)
+- 官网：[https://cool-admin.com](https://cool-admin.com)
