@@ -12,7 +12,7 @@ coming soon！！！
 
 因此如果你需要开发 Ai 相关应用，这个可能会给你带来巨大的帮助。
 
-![流程编排](/show/flow.jpeg){data-zoomable}
+![流程编排](/show/flow.png){data-zoomable}
 
 ::: warning 注意
 

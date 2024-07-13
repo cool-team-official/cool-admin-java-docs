@@ -32,7 +32,7 @@ Cool Admin 做为后来者有后发优势，主要特点：
 
 ![](/show/admin.png){data-zoomable}
 
-![](/show/flow.jpeg){data-zoomable}
+![](/show/flow.png){data-zoomable}
 
 ## 内置功能
 
