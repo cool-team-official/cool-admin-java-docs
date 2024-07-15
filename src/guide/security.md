@@ -1,7 +1,9 @@
 # 权限校验
-采用spring-security与 jwt 作为框架安全与权限校验。
+
+采用 spring-security 与 jwt 作为框架安全与权限校验。
 
 ## 配置
+
 ```yaml
 cool:
   # token 相关配置
@@ -10,11 +12,10 @@ cool:
     expire: 1800
     # 刷新token过期时间 单位：秒 7天
     refreshExpire: 604800
-    # 密钥
-    secret: DSAKOJLFAADASKD
 ```
 
 ## 原理
+
 1、系统启动的时候，系统会查询并向[spring-security](https://spring.io/projects/spring-security)加载所有设置的权限；
 
 ```java
@@ -73,6 +74,7 @@ public class MySecurityMetadataSource implements FilterInvocationSecurityMetadat
     }
 }
 ```
+
 2、用户登录，查询该用户所具有的权限并缓存；
 
 ```java
@@ -115,6 +117,7 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 ```
 
 3、每次调用接口的时候[spring-security](https://spring.io/projects/spring-security)权限拦截器校验当前用户权限；
+
 ```java
 /**
  * 权限管理拦截器
@@ -166,7 +169,9 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
     }
 }
 ```
+
 4.鉴权拦截配置 jtw
+
 ```java
 @EnableWebSecurity
 @Configuration
@@ -237,27 +242,31 @@ public class JwtSecurityConfig {
 ```
 
 ## 当前用户
+
 - 获得用户名
+
 ```java
  @Resource
  private CoolSecurityUtil coolSecurityUtil;
 
  String username = coolSecurityUtil.username();
 ```
+
 - 获得用户信息
-请求过程中会解析 token，并将用户信息存在整个请求过程中的requestParams
+  请求过程中会解析 token，并将用户信息存在整个请求过程中的 requestParams
+
 ```java
  @Resource
  private CoolSecurityUtil coolSecurityUtil;
 
  JSONObject userInfo = coolSecurityUtil.userInfo(requestParams);
 ```
+
 userInfo
 
-| 字段 | 类型 | 说明 |
-|  -  |  - | - |
-|  roleIds  |  Long[] | 角色数组 |
-|  username  |  String| 用户名 |
-|  userId  |  Long | 用户ID |
-|  passwordVersion  |  Integer | 密码版本号 |
-
+| 字段            | 类型    | 说明       |
+| --------------- | ------- | ---------- |
+| roleIds         | Long[]  | 角色数组   |
+| username        | String  | 用户名     |
+| userId          | Long    | 用户 ID    |
+| passwordVersion | Integer | 密码版本号 |

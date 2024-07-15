@@ -1,8 +1,10 @@
 # 缓存
-为了不过多依赖环境，框架自带基于springCache默认实现了两种缓存
+
+为了不过多依赖环境，框架自带基于 springCache 默认实现了两种缓存
 
 - caffeine 无需额外安装软件，由 Ben Manes 开发的一个 Java 缓存库，旨在提供高性能、高效的缓存解决方案。
-- redis    需安装redis，提供了一种高效且可靠的解决方案，能够显著提升应用程序的性能和响应速度。
+- redis 需安装 redis，提供了一种高效且可靠的解决方案，能够显著提升应用程序的性能和响应速度。
+
 ```yaml
 spring:
   # caffeine 缓存
@@ -20,10 +22,13 @@ spring:
 #      database: 0
 #      password:
 ```
+
 可以选择你想使用的缓存，性能要求比较高或有分布式部署需求的建议配置成 redis
 
 # 使用
+
 - 原生 [spring](https://spring.io/guides/gs/caching)方式
+
 ```java
 @CacheConfig(cacheNames = {"comm"})
 @Service
@@ -36,7 +41,9 @@ public class DemoCacheServiceImpl implements DemoCacheService {
     }
 }
 ```
+
 - 框架特有的通用工具类，CoolCache
+
 ```java
 @Service
 public class DemoCacheServiceImpl implements DemoCacheService {

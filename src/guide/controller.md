@@ -1,6 +1,9 @@
 # 控制器
+
 所有的 controller 都继承自 BaseController，该父类已经实现了以下六个基础方法：add、delete、update、page、list、info，可以大大简化代码，使得 controller 更加简洁。
+
 ## 示例
+
 ```java
 @Tag(name = "测试CURD", description = "测试CURD")
 @CoolRestController(value = "/cool", api = {"add", "delete", "update", "page", "list", "info"})
@@ -11,16 +14,19 @@ public class AdminDemoInfoController extends BaseController<DemoService, DemoEnt
     }
 }
 ```
+
 这样就默认实现了以下六个接口：
+
 - POST 新增
 - POST 删除
 - POST 修改
 - POST 分页查询
 - POST 查询列表
 - GET 根据列表查询单个信息
-等 6 个接口
+  等 6 个接口
 
 ## 查询配置
+
 ```java
 @Tag(name = "测试CURD", description = "测试CURD")
 @CoolRestController(value = "/cool", api = {"add", "delete", "update", "page", "list", "info"})
@@ -31,16 +37,18 @@ public class AdminDemoInfoController extends BaseController<DemoService, DemoEnt
                 .fieldEq("status") // 字段全匹配，对应请求参数中同名参数
                 .keyWordLikeFields("name", "phone") // 需要模糊查询的字段，对应请求参数中的 keyWord
                 .select("name", "phone", "age") // 返回字段
-                .queryWrapper(Wrappers.<DemoEntity>query().eq("name", requestParams.getStr("name")))); // 其他查询方式 具体看 https://baomidou.com/文档
+                .queryWrapper(QueryWrapper.create())); // 其他查询方式 具体看 https://mybatis-flex.com/zh/base/querywrapper.html文档
         setListOption(createOp()); // 列表查询 跟分页查询一样
     }
 }
 ```
 
 ## 请求参数
-为了方便获取参数，框架封装了一个请求属性，将 URL、表单、body 
 
-等参数封装在了一个JSONObject requestParams，开发者可以从中方便的获取各种参数；
+为了方便获取参数，框架封装了一个请求属性，将 URL、表单、body
+
+等参数封装在了一个 JSONObject requestParams，开发者可以从中方便的获取各种参数；
+
 ```java
 @Tag(name = "测试CURD", description = "测试CURD")
 @CoolRestController(value = "/cool", api = {"add", "delete", "update", "page", "list", "info"})
@@ -49,7 +57,7 @@ public class AdminDemoInfoController extends BaseController<DemoService, DemoEnt
     protected void init(HttpServletRequest request, JSONObject requestParams) {
         // 可以在这边实现一下列表数据排序规则,查询条件过滤，返回哪些字段等
     }
-    
+
     @PostMapping("/test")
     public R test(@RequestAttribute JSONObject requestparams, String user) {
         System.out.println(requestparams.getStr("user"));
@@ -57,7 +65,9 @@ public class AdminDemoInfoController extends BaseController<DemoService, DemoEnt
     }
 }
 ```
+
 ## 重写实现
+
 默认实现了通用的六个接口方法，如果不满足需求，可以在对应的 service 中重写方法。
 
 ```java
@@ -77,7 +87,9 @@ public class AdminDemoInfoController extends BaseController<DemoService, DemoEnt
     }
 }
 ```
-同样也可以对service进行重写
+
+同样也可以对 service 进行重写
+
 ```java
 @Service
 public class DemoServiceImpl extends BaseServiceImpl<DemoMapper, DemoEntity> implements DemoService {
@@ -88,10 +100,13 @@ public class DemoServiceImpl extends BaseServiceImpl<DemoMapper, DemoEntity> imp
     }
 }
 ```
-和传统的controller对比一下是简化了不少，接下来我们看看实现的原理
+
+和传统的 controller 对比一下是简化了不少，接下来我们看看实现的原理
 
 # 原理
+
 ## 接口路由规则
+
 ```
 // 模块目录
 ├── modules
@@ -103,9 +118,12 @@ public class DemoServiceImpl extends BaseServiceImpl<DemoMapper, DemoEntity> imp
 │   │    │     │     └── AppDemoInfoController.java
 
 ```
-- 生成的路由前缀为： /admin/demo/info/xxx与/app/demo/info/xxx
-- 规则为: admin(app)/模块名/AdminDemoInfoController转成小写替换掉admin(app)、模块名和controller
+
+- 生成的路由前缀为： /admin/demo/info/xxx 与/app/demo/info/xxx
+- 规则为: admin(app)/模块名/AdminDemoInfoController 转成小写替换掉 admin(app)、模块名和 controller
+
 ## 自定义路由注解
+
 ```java
 public @interface CoolRestController {
 
@@ -118,12 +136,15 @@ public @interface CoolRestController {
     String[] api() default {};
 }
 ```
-## 重写getMappingForMethod
-我们不直接使用 spring自带的注解，而是对它做一层封装，controller上加了这个注解后
 
-将由以下这个类实现自动配置模块路由，该类继承了 spring的RequestMappingHandlerMapping，并重写了getMappingForMethod方法
+## 重写 getMappingForMethod
 
-根据一定规则生成path，返回给spring做解析。
+我们不直接使用 spring 自带的注解，而是对它做一层封装，controller 上加了这个注解后
+
+将由以下这个类实现自动配置模块路由，该类继承了 spring 的 RequestMappingHandlerMapping，并重写了 getMappingForMethod 方法
+
+根据一定规则生成 path，返回给 spring 做解析。
+
 ```java
 public class AutoPrefixUrlMapping extends RequestMappingHandlerMapping {
 

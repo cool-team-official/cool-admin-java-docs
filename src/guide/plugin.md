@@ -1,57 +1,23 @@
 # 扩展插件
 
-为了丰富系统功能，我们提供了插件系统，可以通过插件的方式来扩展系统功能。  
-  
-而不用一味地堆功能，导致系统臃肿。你可以自己开发插件，也可以使用别人开发的插件。 或者通过官网[下载插件](https://cool-js.com/plugin/list.html)。
+为了丰富系统功能，我们提供了插件系统，可以通过插件的方式来扩展系统功能。
+
+而不用一味地堆功能，导致系统臃肿。你可以自己开发插件，也可以使用别人开发的插件。
+
+[点击前往插件市场](https://cool-js.com/plugin/list.html)
 
 ## 使用插件
 
 ### 1、安装
+
 首先下载插件包，然后在系统中安装插件包。插件包可以通过官网[下载插件](https://cool-js.com/plugin/list.html)。
 
-打开后台管理系统，点击左侧菜单扩展管理->插件管理，点击+按钮，选择插件包进行安装。   
-   
-开发调试过程可使用指定目录，通过访问接口直接加载，无需再后台手动上传，方便调试
-```java
-package com.cool.core.base.controller;
+打开后台管理系统，点击左侧菜单`扩展管理`/`插件管理`，点击+按钮，选择插件包进行安装。
 
-import cn.hutool.core.util.ObjUtil;
-import com.cool.core.plugin.service.CoolPluginService;
-import com.cool.core.util.ConvertUtil;
-import com.cool.core.util.CoolPluginInvokers;
-import java.io.File;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
-
-@Controller
-@RequiredArgsConstructor
-public class CommonController {
-
-    final private CoolPluginService coolPluginService;
-
-    /**
-     * 指定目录加载插件
-     */
-    @PostMapping("/testPlugin/reload")
-    @ResponseBody
-    public String reload() {
-        // 替换掉自己插件编译的路径，无需在页面上上传
-        File file = new File(
-            "/Users/mac/work/cool_new/cool-admin-java-plugin/target/my_cool_plugin.cool");
-        MultipartFile multipartFile = ConvertUtil.convertToMultipartFile(file);
-        coolPluginService.install(multipartFile, true);
-        return "reload Success";
-    }
-}
-
-```
+![](/guide/plugin-install.gif)
 
 ### 2、调用
+
 安装插件之后，就可以在代码中调用插件的方法了。
 
 ```java
@@ -84,7 +50,9 @@ public class CommonController {
   }
 }
 ```
+
 运行结果
+
 ```
 2024-07-13T20:01:18.543+08:00  INFO 32615 --- [cool-admin-java] [nio-8001-exec-5] com.cool.core.util.CoolPluginInvokers    : 调用插件类: test, 方法: invokePlugin 参数: []
 Hello invokePlugin
@@ -170,39 +138,54 @@ public class MyCoolPlugin extends BaseCoolPlugin {
   }
 }
 ```
+
 其中我们可以在插件包里通过 invokeMain 方法去调用主应用的一些对象方法
 
 比如 coolCache 缓存对象, 通过反射实现
 
-在加载jar包时会想该插件注入ApplicationContext，使得可以在插件中获取主应用中的bean
+在加载 jar 包时会想该插件注入 ApplicationContext，使得可以在插件中获取主应用中的 bean
 
 ### 3、配置
+
 有时候开发时的配置和生产环境的配置是不一样的，我们可以通过配置文件来实现。
 
 例如原本的配置文件是这样的
+
 ```json
 {
-	"appId": "xxxxx",
-	"appSecret": "xxxxx",
-	"filePath": "banner.txt"
+  "appId": "xxxxx",
+  "appSecret": "xxxxx",
+  "filePath": "banner.txt"
 }
 ```
-其中 banner.txt 为主应用resources资源目录下的文件，路径可以自己指定，范围在resources下
+
+其中 banner.txt 为主应用 resources 资源目录下的文件，路径可以自己指定，范围在 resources 下
 
 ## 开发插件
+
 ### 1、脚手架
+
 为了方便开发插件和统一插件开发规范，我们提供了插件脚手架，可以快速开发我们的插件。
 
+脚手架源码仓库：
+
+[https://github.com/cool-team-official/cool-admin-java-plugin](https://github.com/cool-team-official/cool-admin-java-plugin)
+
+或
+
+[https://gitee.com/cool-team-official/cool-admin-java-plugin](https://gitee.com/cool-team-official/cool-admin-java-plugin)
+
 ### 2、目录结构
+
 ```
 .
 main
 ├─ java
 │  └─ com.cool
-│      ├─core           核心包  
-│      │  ├─ annotation  
+│      ├─core           核心包
+│      │  ├─ annotation
 │      │  └─ ...
-│      └─ plugin  
+│      └─ plugin
 │           └─ MyCoolPlugin 插件包，插件类放在这个包下,在打包的时候选择要打包的插件，加上@CoolPlugin注解
 ├─ resources
 │       └─ plugin.json 插件信息配置文件
@@ -213,8 +196,11 @@ test
 │        └─ MyCoolPluginTest 插件运行测试类
 
 ```
+
 ### 3、开发过程
+
 - 配置插件信息(plugin.json)
+
 ```json
 {
   "name": "测试",
@@ -231,23 +217,25 @@ test
   }
 }
 ```
+
 config 是插件的配置信息，不同的插件有不同的配置，上面只是个例子，实际开发中可以根据自己的需求来配置,在后台插件管理里可以动态修改
 
 ### 4、字段解释
 
-| 字段          | 说明                      |
-|-------------|-------------------------|
-| name        | 角色数组                    |
-| key         | 插件唯一标识                  |
+| 字段        | 说明                                     |
+| ----------- | ---------------------------------------- |
+| name        | 角色数组                                 |
+| key         | 插件唯一标识                             |
 | hook        | 插件钩子，比如替换系统的上传组件，upload |
-| version     | 版本号                     |
-| description | 插件描述                    |
-| author      | 作者                      |
-| logo        | 插件 logo，建议尺寸 256x256    |
-| readme      | 插件介绍，会展示在插件的详情中         |
-| config      | 插件配置， 每个插件的配置各不相同       |
+| version     | 版本号                                   |
+| description | 插件描述                                 |
+| author      | 作者                                     |
+| logo        | 插件 logo，建议尺寸 256x256              |
+| readme      | 插件介绍，会展示在插件的详情中           |
+| config      | 插件配置， 每个插件的配置各不相同        |
 
 ## 插件详解
+
 ```java
 package com.cool.plugin;
 
@@ -284,12 +272,12 @@ public class DemoCoolPlugin extends BaseCoolPlugin {
 }
 ```
 
-
-- 类必须要有 @CoolPlugin 注解，一个插件jar有且只能有一个类被 @CoolPlugin 注解
+- 类必须要有 @CoolPlugin 注解，一个插件 jar 有且只能有一个类被 @CoolPlugin 注解
 - 类必须继承 BaseCoolPlugin, 并实现 invokePlugin 插件方法
   满足以上条件，在插件导入时才能被识别到。  
-在提供的插件脚手架中已经应用了常用的依赖如hutool等  
-在开发过程中如果需要引入第三方类库，可使用maven引入依赖，如我们这边示例使用到了中文转拼音
+  在提供的插件脚手架中已经应用了常用的依赖如 hutool 等  
+  在开发过程中如果需要引入第三方类库，可使用 maven 引入依赖，如我们这边示例使用到了中文转拼音
+
 ```xml
 <dependency>
   <groupId>cn.hutool</groupId>
@@ -305,8 +293,9 @@ public class DemoCoolPlugin extends BaseCoolPlugin {
     <version>2.5.0</version>
 </dependency>
 ```
+
 在我们脚手架上你可以发现，我们还引入了其他包 springframework、hutool 等，这会使得打包结果很臃肿，这边使用到了
-maven-shade-plugin maven插件可以在打包的时候将在我们 cool-admin-java 主应用项目已经有的依赖给排除掉，避免打包结果过大
+maven-shade-plugin maven 插件可以在打包的时候将在我们 cool-admin-java 主应用项目已经有的依赖给排除掉，避免打包结果过大
 
 ```xml
 <!--***为了开发插件如果引入了主应用已经有的maven依赖可以在下面的 maven-shade-plugin 中排除掉不打入jar***-->
@@ -351,9 +340,12 @@ maven-shade-plugin maven插件可以在打包的时候将在我们 cool-admin-ja
     </plugins>
 </build>
 ```
+
 在执行打包的过程，可以在打包日志中查看我们排除和引入了哪些包
+
 - Including 为引入
 - Excluding 为排除引入
+
 ```
 [INFO] --- maven-shade-plugin:3.2.4:shade (default) @ cool-admin-java-plugin ---
 [INFO] Including com.belerweb:pinyin4j:jar:2.5.0 in the shaded jar.
@@ -373,42 +365,53 @@ maven-shade-plugin maven插件可以在打包的时候将在我们 cool-admin-ja
 ```
 
 ## 打包
+
 打包命令
+
 ```
 mvn clean package
 ```
-打包结果, 在 target目录下 .cool后缀的文件，就是我们的插件包
+
+打包结果, 在 target 目录下 .cool 后缀的文件，就是我们的插件包
+
 ```
 target/cool-admin-java-plugin-1.0-SNAPSHOT.cool
 ```
 
-其中对应的包名称 可在pom.xml中的properties里指定
+其中对应的包名称 可在 pom.xml 中的 properties 里指定
+
 ```xml
 <properties>
     <cool.plugin.name>my_cool_plugin</cool.plugin.name>
 </properties>
 ```
+
 最终打出的包为: my_cool_plugin.cool
 
 ## 安装插件
-在后台插件管理页面，安装插件将打包好的.cool文件上传。
+
+在后台插件管理页面，安装插件将打包好的.cool 文件上传。
 
 ## 实现原理
+
 - 动态加载 Jar 包
-> 实现动态加载的技术方案  
-在 SpringBoot 中实现动态加载 Jar 包：
-URLClassLoader 是 Java 标准库中提供的一个类加载器，它可以加载指定的 URL 资源，包括本地文件系统、远程服务器和 JAR 文件等。  
-通过 URLClassLoader，我们可以在运行时动态地加载外部的 Jar 包或类。
+
+  > 实现动态加载的技术方案  
+  > 在 SpringBoot 中实现动态加载 Jar 包：
+  > URLClassLoader 是 Java 标准库中提供的一个类加载器，它可以加载指定的 URL 资源，包括本地文件系统、远程服务器和 JAR 文件等。  
+  > 通过 URLClassLoader，我们可以在运行时动态地加载外部的 Jar 包或类。
 
 - 优势：
-> 1、灵活性高：可以动态指定 Jar 包的位置和版本。  
-> 2、可控性强：可以通过代码控制加载、卸载和替换 Jar 包。
+  > 1、灵活性高：可以动态指定 Jar 包的位置和版本。  
+  > 2、可控性强：可以通过代码控制加载、卸载和替换 Jar 包。
 
 实现方法：
+
 ```java
 URL jarUrl = new URL("jar:file:" + new File(jarFilePath).getAbsolutePath() + "!/");
 DynamicJarClassLoader dynamicJarClassLoader = new DynamicJarClassLoader(new URL[]{jarUrl}, Thread.currentThread().getContextClassLoader());
 ```
+
 动态加载 Jar 包具有以下几个显著的优势：
 
 - 1、灵活性: 动态加载允许应用程序在运行时根据需求加载、卸载和替换 Jar 包或其内部的类和资源，提供了极大的灵活性。

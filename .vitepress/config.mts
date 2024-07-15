@@ -99,20 +99,22 @@ export default defineConfig({
         text: "教程",
         items: [
           { text: "快速开始", link: "/src/guide/quick.md" },
+          { text: "目录结构", link: "/src/guide/dir.md" },
           { text: "Ai编码", link: "/src/guide/ai.md" },
           { text: "Ai流程编排", link: "/src/guide/flow.md" },
           { text: "扩展插件", link: "/src/guide/plugin.md" },
+          { text: "开发方式", link: "/src/guide/dev.md" },
           {
             text: "核心",
             items: [
-              { text: "Spring Boot3", link: "/src/guide/springboot3.md" },
-              { text: "控制器(controller)", link: "/src/guide/controller.md" },
-              { text: "缓存", link: "/src/guide/cache.md" },
+              { text: "控制器(Controller)", link: "/src/guide/controller.md" },
+              { text: "服务(Service)", link: "/src/guide/service.md" },
+              { text: "数据库(Db)", link: "/src/guide/db.md" },
+              { text: "缓存(Cache)", link: "/src/guide/cache.md" },
               { text: "文件上传", link: "/src/guide/upload.md" },
               { text: "统一异常", link: "/src/guide/exception.md" },
               { text: "权限校验", link: "/src/guide/security.md" },
               { text: "数据初始化", link: "/src/guide/initData.md" },
-              { text: "代码生成", link: "/src/guide/generatorCode.md" },
               { text: "swagger 文档", link: "/src/guide/swagger.md" },
             ],
           },
@@ -133,7 +135,7 @@ export default defineConfig({
       },
       {
         text: "常见问题",
-        link: "/src/question/commonQuestion.md",
+        link: "/src/question/common.md",
       },
       {
         text: "交流合作",

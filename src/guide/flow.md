@@ -2,7 +2,9 @@
 
 coming soon！！！
 
-[nodejs 版本视频演示](https://www.bilibili.com/video/BV1i1421r7ri/)
+[Nodejs 版本](https://cool-js.com/plugin/detail.html?id=105)
+
+[视频演示](https://www.bilibili.com/video/BV1Dw4m1Y7m6/)
 
 开发 Ai 应用必备！！！
 
@@ -16,6 +18,6 @@ coming soon！！！
 
 ::: warning 注意
 
-Ai 流程编排+知识库需要单独购买，预售 999 元
+Ai 流程编排+知识库届时会上架到插件市场
 
 :::
