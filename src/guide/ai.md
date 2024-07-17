@@ -5,3 +5,5 @@
 ![](/show/code.png){data-zoomable}
 
 [B 站视频教程](https://www.bilibili.com/video/BV1Hm421g7Br/?)
+
+[在线演示](https://show.cool-admin.com/helper/ai-code)

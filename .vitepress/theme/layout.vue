@@ -16,6 +16,7 @@
 <script setup>
 import DefaultTheme from "vitepress/theme";
 import { onMounted, reactive } from "vue";
+import "./custom.css";
 
 const { Layout } = DefaultTheme;
 
@@ -33,9 +34,12 @@ const ad = reactive({
   get() {
     fetch("https://service.cool-js.com/api/app/info/ad/list", {
       method: "POST",
-      body: {
-        channel: 1,
+      headers: {
+        "Content-Type": "application/json",
       },
+      body: JSON.stringify({
+        channel: 1,
+      }),
     })
       .then((res) => res.json())
       .then((res) => {

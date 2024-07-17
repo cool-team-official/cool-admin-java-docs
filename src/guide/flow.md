@@ -2,8 +2,6 @@
 
 coming soon！！！
 
-[Nodejs 版本](https://cool-js.com/plugin/detail.html?id=105)
-
 [视频演示](https://www.bilibili.com/video/BV1Dw4m1Y7m6/)
 
 开发 Ai 应用必备！！！
@@ -18,6 +16,6 @@ coming soon！！！
 
 ::: warning 注意
 
-Ai 流程编排+知识库届时会上架到插件市场
+Ai 流程编排+知识库 Java 版本预计 8 月底 届时会上架到插件市场，可以先体验[NodeJs 版本](https://cool-js.com/plugin/detail.html?id=105)
 
 :::

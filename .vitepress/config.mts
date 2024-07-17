@@ -23,6 +23,7 @@ export default defineConfig({
 
     outline: {
       label: "页面导航",
+      level: [2, 3],
     },
 
     lastUpdated: {
@@ -118,6 +119,7 @@ export default defineConfig({
               { text: "swagger 文档", link: "/src/guide/swagger.md" },
             ],
           },
+          { text: "部署项目", link: "/src/guide/deploy.md" },
         ],
       },
       {
