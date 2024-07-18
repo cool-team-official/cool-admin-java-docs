@@ -16,6 +16,6 @@ coming soon！！！
 
 ::: warning 注意
 
-Ai 流程编排+知识库 Java 版本预计 8 月底 届时会上架到插件市场，可以先体验[NodeJs 版本](https://cool-js.com/plugin/detail.html?id=105)
+Ai 流程编排+知识库 Java 版本预计 8 月底 届时会上架到插件市场，可以先体验[NodeJs 版本](https://cool-js.com/plugin/105)
 
 :::

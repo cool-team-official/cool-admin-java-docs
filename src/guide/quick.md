@@ -49,6 +49,8 @@ spring:
 
 ### 4、启动前端服务
 
+[点击前往前端项目详细文档](https://vue.cool-admin.com)
+
 在项目根目录下(跟 package.json 同级)执行命令：
 
 ```shell

@@ -12,6 +12,8 @@
 
 ## 前端（点个 Star 哦）
 
+[点击前往前端项目详细文档](https://vue.cool-admin.com)
+
 [https://github.com/cool-team-official/cool-admin-vue](https://github.com/cool-team-official/cool-admin-vue)
 
 或
