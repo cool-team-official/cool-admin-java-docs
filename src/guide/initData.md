@@ -2,7 +2,7 @@
 
 有些功能模块上线时，需要初始化一些数据
 
-可以在 resources 下的 cool/data/db 目录创建 demo.json 文件
+可以在 resources 下的 `cool/data/db` 目录创建 `demo.json` 文件
 
 json 格式如下,demo 为表的名称，里面是个数组，数组里可以包含多个对象，每个对象中的 key 为表的字段，value 为对应的值
 

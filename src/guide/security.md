@@ -243,7 +243,18 @@ public class JwtSecurityConfig {
 
 ## 当前用户
 
-- 获得用户名
+获取当前用户信息
+
+### 后端用户
+
+- Controller 中获得
+
+```java
+@GetMapping("/person")
+public R person(@RequestAttribute() Long adminUserId)
+```
+
+- Security 方式
 
 ```java
  @Resource
@@ -270,3 +281,45 @@ userInfo
 | username        | String  | 用户名     |
 | userId          | Long    | 用户 ID    |
 | passwordVersion | Integer | 密码版本号 |
+
+### 应用用户
+
+- Controller 中获得
+
+```java
+@GetMapping("/xxx")
+public R xxx(@RequestAttribute() Long appUserId)
+```
+
+## 忽略 token
+
+开放接口，忽略 token 校验
+
+### 方法上
+
+通过在方法上加`TokenIgnore`注解可以的接口不会进行 token 校验
+
+```java
+@TokenIgnore
+@GetMapping("/eps")
+public R eps() {
+    return R.ok(coolEps.getApp());
+}
+```
+
+### 类上
+
+也可以注解在类上
+
+```java
+/**
+ * 字典信息
+ */
+@TokenIgnore(value = {"page"})
+@CoolRestController(api = {"add", "delete", "update", "page", "list", "info"})
+public class AdminDictInfoController{ }
+```
+
+::: warning 注意
+无论是注解在方法还是类上，都必须配合`CoolRestController`使用，其它的无效
+:::
