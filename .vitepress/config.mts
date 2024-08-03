@@ -124,6 +124,7 @@ export default defineConfig({
               { text: "统一异常(exception)", link: "/src/guide/exception.md" },
               { text: "权限校验(security)", link: "/src/guide/security.md" },
               { text: "数据初始化(init)", link: "/src/guide/initData.md" },
+              { text: "请求日志(log)", link: "/src/guide/recordLog.md" },
               { text: "接口文档(swagger)", link: "/src/guide/swagger.md" },
             ],
           },

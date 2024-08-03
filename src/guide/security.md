@@ -251,26 +251,21 @@ public class JwtSecurityConfig {
 
 ```java
 @GetMapping("/person")
-public R person(@RequestAttribute() Long adminUserId)
+public R person(@RequestAttribute() Long adminUserId);
 ```
 
 - Security 方式
 
 ```java
- @Resource
- private CoolSecurityUtil coolSecurityUtil;
-
- String username = coolSecurityUtil.username();
+ Long userId = CoolSecurityUtil.getCurrentUserId();
+ String username = CoolSecurityUtil.getAdminUsername();
 ```
 
 - 获得用户信息
   请求过程中会解析 token，并将用户信息存在整个请求过程中的 requestParams
 
 ```java
- @Resource
- private CoolSecurityUtil coolSecurityUtil;
-
- JSONObject userInfo = coolSecurityUtil.userInfo(requestParams);
+ JSONObject userInfo = CoolSecurityUtil.getAdminUserInfo(requestParams);
 ```
 
 userInfo
@@ -284,11 +279,8 @@ userInfo
 
 ### 应用用户
 
-- Controller 中获得
-
 ```java
-@GetMapping("/xxx")
-public R xxx(@RequestAttribute() Long appUserId)
+Long userId = CoolSecurityUtil.getCurrentUserId();
 ```
 
 ## 忽略 token
