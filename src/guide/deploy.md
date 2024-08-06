@@ -198,7 +198,7 @@ docker build -t cool-admin-vue:1.0 .
 // 运行后端
 docker run --network cool -p 8001:8001 --name midway cool-admin-midway:1.0
 
-// 运行后端
+// 运行前端
 docker run --network cool -p 80:80 --name vue cool-admin-vue:1.0
 
 ```
