@@ -1,8 +1,8 @@
 # Ai 流程编排
 
-coming soon！！！
-
 [视频演示](https://www.bilibili.com/video/BV1Dw4m1Y7m6/)
+
+[点击前往插件市场下载安装](https://cool-js.com/plugin/118)
 
 开发 Ai 应用必备！！！
 
@@ -13,9 +13,3 @@ coming soon！！！
 因此如果你需要开发 Ai 相关应用，这个可能会给你带来巨大的帮助。
 
 ![流程编排](/show/flow.png){data-zoomable}
-
-::: warning 注意
-
-Ai 流程编排+知识库 Java 版本预计 8 月底 届时会上架到插件市场，可以先体验[NodeJs 版本](https://cool-js.com/plugin/105)
-
-:::
