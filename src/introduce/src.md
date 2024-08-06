@@ -10,6 +10,10 @@
 
 [https://gitee.com/cool-team-official/cool-admin-java](https://gitee.com/cool-team-official/cool-admin-java)
 
+或
+
+[https://gitcode.com/cool_team/cool-admin-java](https://gitcode.com/cool_team/cool-admin-java)
+
 ## 前端（点个 Star 哦）
 
 [点击前往前端项目详细文档](https://vue.cool-admin.com)
@@ -19,6 +23,10 @@
 或
 
 [https://gitee.com/cool-team-official/cool-admin-vue](https://gitee.com/cool-team-official/cool-admin-vue)
+
+或
+
+[https://gitcode.com/cool_team/cool-admin-vue](https://gitcode.com/cool_team/cool-admin-vue)
 
 ## 文档 （Star 哦）
 
