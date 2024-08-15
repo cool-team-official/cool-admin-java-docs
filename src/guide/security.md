@@ -170,7 +170,7 @@ public class MyFilterSecurityInterceptor extends AbstractSecurityInterceptor imp
 }
 ```
 
-4.鉴权拦截配置 jtw
+4.鉴权拦截配置 jwt
 
 ```java
 @EnableWebSecurity
