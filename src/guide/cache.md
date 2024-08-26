@@ -25,7 +25,7 @@ spring:
 
 可以选择你想使用的缓存，性能要求比较高或有分布式部署需求的建议配置成 redis
 
-# 使用
+## 使用
 
 - 原生 [spring](https://spring.io/guides/gs/caching)方式
 
@@ -42,7 +42,7 @@ public class DemoCacheServiceImpl implements DemoCacheService {
 }
 ```
 
-- 框架特有的通用工具类，CoolCache
+## 框架特有的通用工具类，CoolCache
 
 ```java
 @Service
@@ -55,5 +55,26 @@ public class DemoCacheServiceImpl implements DemoCacheService {
         coolCache.set("a", 1);
         return coolCache.get("a", Integer.class);
     }
+}
+```
+
+## 通过coolCache缓存模板，获取数据
+
+```java
+ public Object logistics(String num) {
+    // 物流单号
+    String num = orderInfoEntity.getLogistics().getNum();
+    String cacheKey = "logistics:" + orderId + ":" + num;
+    // 获取物流信息
+    return coolCache.get(cacheKey, Duration.ofMinutes(30),
+        () -> {
+            // 从第三方 或者DB 获取数据
+            Object invoke = CoolPluginInvokers.invoke("wuliu", "query", num, "");
+            if (ObjUtil.isEmpty(invoke)) {
+                return null;
+            }
+            String result = (String) invoke;
+            return JSONUtil.parseObj(result).get("result");
+        });
 }
 ```

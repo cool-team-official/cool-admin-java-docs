@@ -42,6 +42,60 @@ public class AdminDemoInfoController extends BaseController<DemoService, DemoEnt
     }
 }
 ```
+以上是针对Entity单表查询方式，如果我们有需要连表查询，查询另一张表的字段，这样就需要在Entity加上另一张表的的字段，针对这种场景，我们可以使用
+自定义的查询方式
+```java
+public class AppMarketCouponUserController extends BaseController<MarketCouponUserService, MarketCouponUserEntity> {
+    protected void init(HttpServletRequest request, JSONObject requestParams) {
+        setPageOption(
+            createOp()
+                .select(MARKET_COUPON_INFO_ENTITY.ALL_COLUMNS,
+                    MARKET_COUPON_USER_ENTITY.STATUS.as("useStatus")) // 查询连表字段
+                .queryWrapper(
+                    QueryWrapper.create()
+                        .from(MARKET_COUPON_USER_ENTITY)
+                        .leftJoin(MARKET_COUPON_INFO_ENTITY) // leftJoin 连表查询
+                        .on(MARKET_COUPON_USER_ENTITY.USER_ID.eq(
+                                CoolSecurityUtil.getCurrentUserId())
+                            .and(MARKET_COUPON_USER_ENTITY.COUPON_ID.eq(
+                                MARKET_COUPON_INFO_ENTITY.ID))))
+                .queryModeEnum(QueryModeEnum.CUSTOM)  // 自定义查询模式，默认为ENTITY 实体，自定义场景主要使用在关联表查询插件，
+                // 需要返回的字段分布在各个表里，需要组装数据，通过这种方式，就不需要在entity 中加非存储数据库的字段；默认转成map，注意如果该表有json字段，
+                // 需要通过下面的 transform 手动进行转换
+                .asType(Map.class)  // 默认为Map，也可以自己定义VO
+                .transform((list) -> {
+                    list.forEach(o -> {
+                        Map map = (Map) o; // 没有设置asType ，自定义类型默认为 map
+                        if (ObjUtil.isNotEmpty(map.get("condition"))) {
+                            map.put("condition",
+                                JSONUtil.toBean(map.get("condition").toString(), Map.class));
+                        }
+                    });
+                })); // 其他查询方式 具体看 https://mybatis-flex.com/zh/base/querywrapper.html文档
+    }
+}
+```
+查询模式queryModeEnum 还有 ENTITY_WITH_RELATIONS, 实体中 使用了关联查询 @RelationOneToMany 
+如下面这个订单查询，订单产品列表也一并查出    
+
+关联查询用法参考：https://mybatis-flex.com/zh/base/relations-query.html
+```java
+@Getter
+@Setter
+@Table(value = "order_info", comment = "订单信息")
+public class OrderInfoEntity extends BaseEntity<OrderInfoEntity> {
+
+    @Index
+    @ColumnDefine(comment = "用户ID", notNull = true)
+    private Long userId;
+    // ......
+    // 订单商品列表
+    @Ignore
+    @Column(ignore = true)
+    @RelationOneToMany(selfField = "id", targetField = "orderId")
+    private List<OrderGoodsEntity> goodsList;
+}
+```
 
 ## 请求参数
 
