@@ -6,10 +6,10 @@
 - 新增: list和page支持关联查询，支持自定义返回结果类型，并可以在init方法中初始化返回字段类型及数据组装函数定义(参考：[控制器](/src/guide/controller.html#查询配置))
 - 新增: 分布式ID生成组件(参考：[分布式ID](/src/guide/uniqueIDGen.md))
 - 新增: 锁工具(参考：[锁工具](/src/guide/lock.md))
-- 新增: app端访问参数配置接口
+- 新增: 防重提交注解(参考：[防重提交](/src/guide/noRepeatSubmit.md))
 - 调整: 缓存数据模板(参考：[缓存](/src/guide/cache.html#通过coolcache缓存模板-获取数据))
+- 调整: 优化eps解析规则 (参考：[解析规则](/src/guide/controller.html#接口路由规则))
 - 调整: 优化角色修改循环单个处理为批量处理，并异步进行刷新用户权限
-- 调整: 优化eps解析规则
 - 调整: 图形验证码获取区分app和admin
 - 修复: 初始化数据，指定id插入不生效问题
 - 修复: 后台人员查询列表字段关联错误

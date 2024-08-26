@@ -172,9 +172,15 @@ public class DemoServiceImpl extends BaseServiceImpl<DemoMapper, DemoEntity> imp
 │   │    │     │     └── AppDemoInfoController.java
 
 ```
-
 - 生成的路由前缀为： /admin/demo/info/xxx 与/app/demo/info/xxx
 - 规则为: admin(app)/模块名/AdminDemoInfoController 转成小写替换掉 admin(app)、模块名和 controller
+如果在 AdminDemoInfoController.java 同级下有个 AdminDemoUserInfoController.java文件
+
+该接口解析的前缀则是 /admin/demo/user/info/xxx
+
+::: warning 注意
+这个解析规则在 v7.1.3(2024-08-25) 版本才有，在历史版本中需在 admin 包下加一级 user 包，否则这个controller eps识别不了
+:::
 
 ## 自定义路由注解
 

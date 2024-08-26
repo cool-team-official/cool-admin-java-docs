@@ -126,6 +126,7 @@ export default defineConfig({
               { text: "数据初始化(init)", link: "/src/guide/initData.md" },
               { text: "分布式ID(id)", link: "/src/guide/uniqueIDGen.md" },
               { text: "锁(lock)", link: "/src/guide/lock.md" },
+              { text: "防重提交(submit)", link: "/src/guide/noRepeatSubmit.md" },
               { text: "请求日志(log)", link: "/src/guide/recordLog.md" },
               { text: "接口文档(swagger)", link: "/src/guide/swagger.md" },
             ],
