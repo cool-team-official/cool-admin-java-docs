@@ -63,14 +63,12 @@ public class AppMarketCouponUserController extends BaseController<MarketCouponUs
                 // 需要返回的字段分布在各个表里，需要组装数据，通过这种方式，就不需要在entity 中加非存储数据库的字段；默认转成map，注意如果该表有json字段，
                 // 需要通过下面的 transform 手动进行转换
                 .asType(Map.class)  // 默认为Map，也可以自己定义VO
-                .transform((list) -> {
-                    list.forEach(o -> {
-                        Map map = (Map) o; // 没有设置asType ，自定义类型默认为 map
-                        if (ObjUtil.isNotEmpty(map.get("condition"))) {
-                            map.put("condition",
-                                JSONUtil.toBean(map.get("condition").toString(), Map.class));
-                        }
-                    });
+                .transform(o -> {
+                    Map map = (Map) o; // 没有设置asType ，自定义类型默认为 map
+                    if (ObjUtil.isNotEmpty(map.get("condition"))) {
+                        map.put("condition",
+                            JSONUtil.toBean(map.get("condition").toString(), Map.class));
+                    }
                 })); // 其他查询方式 具体看 https://mybatis-flex.com/zh/base/querywrapper.html文档
     }
 }

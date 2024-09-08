@@ -39,3 +39,12 @@ Long orderId = idGenService.next("orderId");
   }]
 }
 ```
+启用唯一ID组件，默认禁用, 如需启用调整为 true
+
+```yaml
+# 分布式唯一ID组件
+leaf:
+  segment:
+    # 默认禁用,如需启用调整为 true
+    enable: false
+```
