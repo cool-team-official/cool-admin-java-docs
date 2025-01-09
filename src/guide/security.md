@@ -287,7 +287,8 @@ Long userId = CoolSecurityUtil.getCurrentUserId();
 
 开放接口，忽略 token 校验
 
-### 方法上
+### 方式一: 注解
+#### 方法上
 
 通过在方法上加`TokenIgnore`注解可以的接口不会进行 token 校验
 
@@ -299,7 +300,7 @@ public R eps() {
 }
 ```
 
-### 类上
+#### 类上
 
 也可以注解在类上
 
@@ -315,3 +316,26 @@ public class AdminDictInfoController{ }
 ::: warning 注意
 无论是注解在方法还是类上，都必须配合`CoolRestController`使用，其它的无效
 :::
+
+### 方式二: 配置文件
+
+在配置文件中加需要忽略的路径，支持通配
+```yaml
+# 忽略url
+ignored:
+  # 忽略后台鉴权url
+  adminAuthUrls:
+    - /
+    - /upload/**
+    - /actuator/**
+    - /download/**
+    - /static/**
+    - /favicon.ico
+    - /v3/api-docs/**
+    - /swagger
+    - /swagger-ui/**
+    - /css/*
+    - /js/*
+    - /druid/**
+    - /admin/base/open/**
+```
