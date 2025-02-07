@@ -16,6 +16,12 @@
 application.yml
 
 ```yaml
+spring:
+  # Web设置
+  web:
+    resources:
+      add-mappings: true
+      static-locations: classpath:/static/,file:./assets/public/,file:/Users/mac/Desktop
 cool:
   # 文件上传相关
   file:
@@ -24,9 +30,9 @@ cool:
     # 本地上传配置
     local:
       # 文件根地址
-      base-url: http://127.0.0.1:${server.port}
+      base-url: http://127.0.0.1:${server.port}/upload
       # 可选，文件存放路径 线上环境请用nginx等静态服务器代理
-      filePath:
+      uploadPath: /Users/mac/Desktop/upload # 默认是相对路径，也支持绝对路径（注意: 需和上面的 spring Web设置配合使用）
 ```
 
 动静分离有许多好处，如不占用主服务器带宽，防止上传恶意文件等。
