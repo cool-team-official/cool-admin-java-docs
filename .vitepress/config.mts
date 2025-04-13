@@ -52,7 +52,7 @@ export default defineConfig({
       { text: "🔥插件市场", link: "https://cool-js.com/plugin" },
       { text: "交流合作", link: "/src/about/index.md" },
       {
-        text: "v7.1.0",
+        text: "v8.0.0",
         items: [
           {
             text: "更新日志",
