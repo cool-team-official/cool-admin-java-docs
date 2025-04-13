@@ -129,6 +129,8 @@ export default defineConfig({
               { text: "防重提交(submit)", link: "/src/guide/noRepeatSubmit.md" },
               { text: "请求日志(log)", link: "/src/guide/recordLog.md" },
               { text: "接口文档(swagger)", link: "/src/guide/swagger.md" },
+              { text: "多租户(tenant)", link: "/src/guide/tenant.md" },
+              { text: "国际化多语言(i18n)", link: "/src/guide/i18n.md" },
             ],
           },
           { text: "部署项目", link: "/src/guide/deploy.md" },

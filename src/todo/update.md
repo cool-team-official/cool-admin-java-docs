@@ -2,6 +2,14 @@
 
 因为有你们的支持，cool-admin 会持续不断地更新，如果方便请点下 Star，这将会给我们带来更多的动力！！！
 
+
+## v8.0.0(2025-04-13)
+- 新增: 支持多租户，全局动态注入查询条件[详情](/src/guide/tenant.md)
+- 新增: 支持多语言，基于大模型自动翻译，无需更改原有代码[详情](/src/guide/i18n.md)
+- 优化: 响应类型封装优化 by @ximu-tao
+- 升级: 升级autotable和mybatis-flex版本，涉及包结构变更 com.tangzc.autotable -> org.dromara.autotable
+- 升级: AI 自动编码[(基于DeepSeek R1)](https://www.deepseek.com/)
+
 ## v7.1.3(2024-08-25)
 - 新增: list和page支持关联查询，支持自定义返回结果类型，并可以在init方法中初始化返回字段类型及数据组装函数定义(参考：[控制器](/src/guide/controller.html#查询配置))
 - 新增: 分布式ID生成组件(参考：[分布式ID](/src/guide/uniqueIDGen.md))
